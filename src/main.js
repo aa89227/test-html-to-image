@@ -26,7 +26,7 @@ downloadBtn.addEventListener('click', () => {
   }
   console.log(capture)
 
-  toPng(capture, { cacheBust: true })
+  toPng(capture, { cacheBust: true, fetchRequestInit: {mode:'no-cors'} })
     .then((dataUrl) => {
       const link = document.createElement('a');
       link.download = 'html-image.png';
