@@ -48,6 +48,13 @@ downloadBtn2.addEventListener('click', () => {
 
   toBlob(capture, { cacheBust: true, fetchRequestInit: {mode:'no-cors'} })
     .then((blob) => {
+      var blobUrl = URL.createObjectURL(blob);
+      var link = document.createElement("a"); // Or maybe get it from the current document
+      link.href = blobUrl;
+      link.download = "aDefaultFileName.png";
+      link.innerText = "Click here to download the file";
+      document.body.appendChild(link); // Or append it whereever you want
+
       if (window.saveAs) {
         window.saveAs(blob, 'my-node.png');
         } else {
