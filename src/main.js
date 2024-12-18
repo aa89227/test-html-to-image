@@ -47,7 +47,7 @@ downloadBtn2.addEventListener('click', () => {
   console.log(capture)
 
   toBlob(capture, { cacheBust: true, fetchRequestInit: {mode:'no-cors'} })
-    .then((dataUrl) => {
+    .then((blob) => {
       if (window.saveAs) {
         window.saveAs(blob, 'my-node.png');
         } else {
