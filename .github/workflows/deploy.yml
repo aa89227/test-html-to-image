@@ -1,0 +1,39 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # 當推送到 main 分支時觸發
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 檢出儲存庫
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # 安裝 Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  # 或你專案所需的 Node.js 版本
+
+      # 安裝依賴
+      - name: Install Dependencies
+        run: npm install
+
+      # 構建專案
+      - name: Build
+        run: npm run build
+
+      # 部署到 GitHub Pages
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          # 如果是專案頁面，需指定以下參數
+          # cname: your-custom-domain.com  # 如果有自訂域名
+          # destination_branch: gh-pages  # 默認為 gh-pages
